@@ -1195,20 +1195,217 @@
             .nav-container {
                 flex-direction: column;
                 gap: 15px;
+                padding: 0 15px;
+            }
+            
+            .theme-switcher {
+                order: -1; /* 主题切换器移到顶部 */
+                align-self: flex-end;
             }
             
             .search-container {
                 margin: 0;
                 max-width: none;
+                order: 1;
             }
             
+            .search-wrapper {
+                flex-direction: column;
+                border-radius: 15px;
+            }
+            
+            .search-input {
+                border-radius: 15px 15px 0 0;
+                padding: 15px 20px;
+                font-size: 16px; /* 防止iOS缩放 */
+            }
+            
+            .source-select {
+                border-radius: 0;
+                padding: 12px 15px;
+            }
+            
+            .search-btn {
+                border-radius: 0 0 15px 15px;
+                padding: 15px 20px;
+            }
+            
+            .main-container {
+                padding: 15px;
+                gap: 15px;
+            }
+            
+            .content-section, .player-section, .lyrics-section {
+                padding: 20px 15px;
+            }
+            
+            /* 歌曲列表优化 */
+            .song-item {
+                padding: 12px 15px;
+                flex-wrap: wrap;
+            }
+            
+            .song-info {
+                flex: 1;
+                min-width: 200px;
+            }
+            
+            .song-actions {
+                margin-top: 8px;
+                width: 100%;
+                justify-content: flex-end;
+            }
+            
+            .song-duration {
+                margin-left: 0;
+                margin-top: 8px;
+            }
+            
+            /* 播放器优化 */
             .current-cover {
-                width: 180px;
-                height: 180px;
+                width: 160px;
+                height: 160px;
             }
             
             .player-controls {
+                gap: 12px;
+            }
+            
+            .control-btn.small {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .play-btn {
+                width: 55px;
+                height: 55px;
+                font-size: 24px;
+            }
+            
+            /* 批量管理优化 */
+            .batch-controls {
+                flex-direction: column;
                 gap: 15px;
+            }
+            
+            .batch-controls > div:last-child {
+                justify-content: center;
+            }
+            
+            .batch-action-btn {
+                flex: 1;
+                min-width: 120px;
+            }
+            
+            /* 导入功能优化 */
+            .import-form {
+                flex-direction: column;
+            }
+            
+            .import-input {
+                margin-bottom: 10px;
+            }
+        }
+
+        /* 更小屏幕适配 */
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 10px 0;
+            }
+            
+            .nav-container {
+                padding: 0 10px;
+            }
+            
+            .logo {
+                font-size: 20px;
+            }
+            
+            .main-container {
+                padding: 10px;
+            }
+            
+            .content-section, .player-section {
+                padding: 15px 10px;
+            }
+            
+            .current-cover {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .song-item {
+                padding: 10px 12px;
+            }
+            
+            .song-name {
+                font-size: 15px;
+            }
+            
+            .song-artist {
+                font-size: 13px;
+            }
+            
+            /* 主题切换器小屏优化 */
+            .theme-menu {
+                right: 10px;
+                grid-template-columns: repeat(4, 20px);
+                gap: 8px;
+            }
+            
+            .theme-swatch {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        /* 横屏手机适配 */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .nav-container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            .theme-switcher {
+                order: 0;
+            }
+            
+            .search-container {
+                max-width: 400px;
+                margin: 0 20px;
+                order: 0;
+            }
+            
+            .main-container {
+                grid-template-columns: 1fr 300px;
+                gap: 15px;
+            }
+            
+            .current-cover {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
+        /* 移动端触摸优化 */
+        @media (pointer: coarse) {
+            .song-item, .control-btn, .action-btn, .like-btn, .batch-action-btn, .theme-button {
+                min-height: 44px; /* iOS推荐的最小触摸区域 */
+                touch-action: manipulation; /* 防止双击缩放 */
+            }
+            
+            .song-checkbox, .batch-checkbox {
+                min-width: 44px;
+                min-height: 44px;
+                touch-action: manipulation;
+            }
+            
+            /* 增大点击区域 */
+            .lyric-line {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
             }
         }
 
@@ -1229,6 +1426,20 @@
 
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(255, 255, 255, 0.5);
+        }
+
+        /* 移动端隐藏滚动条 */
+        @media (max-width: 768px) {
+            .search-results::-webkit-scrollbar,
+            .lyrics-container::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .search-results,
+            .lyrics-container {
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
         }
     </style>
 </head>
